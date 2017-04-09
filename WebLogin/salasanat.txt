@@ -1,4 +1,2 @@
 pekka;akkep123
 jukka;akkuj123
-abc;koira123
-koira;Koira123
