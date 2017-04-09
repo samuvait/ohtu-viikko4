@@ -19,21 +19,6 @@ public class Stepdefs {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("login"));       
         element.click();          
-    } 
-
-    @When("^username \"([^\"]*)\" and password \"([^\"]*)\" are given$")
-    public void username_and_password_are_given(String username, String password) throws Throwable {
-        WebElement element = driver.findElement(By.name("username"));
-        element.sendKeys(username);
-        element = driver.findElement(By.name("password"));
-        element.sendKeys(password);
-        element = driver.findElement(By.name("login"));
-        element.submit();  
-    }
-
-    @Then("^system will respond \"([^\"]*)\"$")
-    public void system_will_respond(String pageContent) throws Throwable {
-        assertTrue(driver.getPageSource().contains(pageContent));
     }
     
     @When("^correct username \"([^\"]*)\" and password \"([^\"]*)\" are given$")
@@ -46,6 +31,11 @@ public class Stepdefs {
         logInWith(username, password);
     }
     
+    @When("^incorrect username \"([^\"]*)\" and incorrect password \"([^\"]*)\" are given$")
+    public void incorrect_username_and_incorrect_password_are_given(String username, String password) throws Throwable {
+        logInWith(username, password);
+    }
+    
     @Then("^user is logged in$")
     public void user_is_logged_in() throws Throwable {
         pageHasContent("Ohtu Application main page");
@@ -55,7 +45,13 @@ public class Stepdefs {
     public void user_is_not_logged_in_and_error_message_is_given() throws Throwable {
         pageHasContent("invalid username or password");
         pageHasContent("Give your credentials to login");
-    }     
+    }
+    
+    @Then("^nonexistent user is not logged in and error message is given$")
+    public void nonexistent_user_is_not_logged_in_and_error_message_is_given() throws Throwable {
+        pageHasContent("invalid username or password");
+        pageHasContent("Give your credentials to login");
+    }
     
     @After
     public void tearDown(){
