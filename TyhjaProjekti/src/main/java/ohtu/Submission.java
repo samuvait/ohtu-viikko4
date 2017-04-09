@@ -3,6 +3,8 @@ package ohtu;
 public class Submission {
     private String student_number;
     private String week;
+    private String name;
+    private String term;
     private String[] aAll;
     private String hours;
     private String a1;
@@ -17,9 +19,54 @@ public class Submission {
     private String a10;
     private String a11;
     private String a12;
+    private String week1;
+    private String week2;
+    private String week3;
+    private String weeknbr;
+    private String max;
 
     public String getStudent_number() {
         return student_number;
+    }
+    
+    public void setTerm(String term) {
+        this.term = term;
+    }
+    
+    public void setWeeknbr() {
+        if (this.week.matches("" + 1)) {
+            max = week1;
+        } else if (this.week.matches("" + 2)) {
+            max = week2;
+        } else if (this.week.matches("" + 3)) {
+            max = week3;
+        }
+    }
+    
+    public void setWeeks(String week1, String week2, String week3) {
+        this.week1 = week1;
+        this.week2 = week2;
+        this.week3 = week3;
+    }
+    
+    public String[] getWeeks() {
+        String[] a = new String[3];
+        a[0] = this.week1;
+        a[1] = this.week2;
+        a[2] = this.week3;
+        return a;
+    }
+    
+    public void setName(String name) {
+        this.term = term;
+    }
+    
+    public String getTerm() {
+        return term;
+    }
+    
+    public String getName() {
+        return name;
     }
 
     public void setStudent_number(String student_number) {
@@ -31,7 +78,7 @@ public class Submission {
         addTo();
         String done = showDone();
         int cnt = countDone();
-        String ret = "viikko " + week + ": tehtyja tehtavia yhteensa: " + cnt + ", aikaa kului " + hours + " tuntia, tehdyt tehtavat: " + done;
+        String ret = "viikko " + week + ": tehtyja tehtavia yhteensa: " + cnt + " (maksimi " + this.max + "), aikaa kului " + hours + " tuntia, tehdyt tehtavat: " + done;
         return ret;
     }
     
